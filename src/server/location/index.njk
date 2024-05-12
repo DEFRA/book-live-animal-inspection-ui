@@ -1,0 +1,41 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+{% set backUrl = "/" %}
+{% set pageTitle = "Location" %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/vehicleDetails" method="get">
+        {{ govukRadios({
+          name: "WhichBorderControlFacility",
+          value: data['WhichBorderControlFacility'],
+          fieldset: {
+            legend: {
+              text: "Which border control post are you going to?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "Sevington",
+              text: "Sevington, England"
+            },
+            {
+              value: "Holyhead",
+              text: "Holyhead, Wales"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+

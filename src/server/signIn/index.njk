@@ -1,0 +1,88 @@
+{% extends 'layouts/page.njk' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – Sign In
+{% endblock %}
+
+{% block content %}
+ {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Sign in using Government Gateway
+      </h1>
+
+      <form class="form" action="" method="post">
+
+        <div class="govuk-form-group">
+  <h3 class="govuk-label-wrapper">
+    <label class="govuk-label govuk-label--m" for="event-name">
+      Government Gateway ID
+    </label>
+  </h3>
+   <div id="event-name-hint" class="govuk-hint">
+    This could be up to 12 characters.
+  </div>
+  <input class="govuk-input" id="event-name" name="eventName" type="text">
+</div>
+
+        <div class="govuk-form-group">
+  <h3 class="govuk-label-wrapper">
+    <label class="govuk-label govuk-label--m" for="event-name">
+      Password
+    </label>
+  </h3>
+  <input type="password" class="govuk-input" id="event-name" name="eventName" type="text">
+</div>
+    </div>
+  </div>
+
+  <a href="vehicleDetails" button type="submit" class="govuk-button" data-module="govuk-button">
+  Sign in</a>
+</button>
+
+<div class="govuk-form-group govuk-form-group--error">
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="passport-issued-hint passport-issued-error">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        When was your passport issued?
+      </h1>
+    </legend>
+    <div id="passport-issued-hint" class="govuk-hint">
+      For example, 27 3 2007
+    </div>
+    <p id="passport-issued-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> The date your passport was issued must be in the past
+    </p>
+    <div class="govuk-date-input" id="passport-issued">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="passport-issued-day">
+            Day
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2 govuk-input--error" id="passport-issued-day" name="passport-issued-day" type="text" value="6" inputmode="numeric">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+            Month
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2 govuk-input--error" id="passport-issued-month" name="passport-issued-month" type="text" value="3" inputmode="numeric">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+            Year
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4 govuk-input--error" id="passport-issued-year" name="passport-issued-year" type="text" value="2076" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+  </form>
+{% endcall %}
+{% endblock %}

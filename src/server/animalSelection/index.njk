@@ -1,0 +1,32 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+{% set backUrl = "/vehicleDetails" %}
+{% set pageTitle = "Animal species" %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/animalNumber" method="get">
+        {{ govukInput({
+            label: {
+              text: "What animal species are you transporting?",
+              classes: "govuk-label--l",
+              isPageHeading: true
+            },
+            hint: {
+              text: "You can add multiple animal species."
+            },
+            id: "animal-type",
+            name: "eventName"
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+
