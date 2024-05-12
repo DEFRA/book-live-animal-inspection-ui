@@ -25,7 +25,7 @@ const config = convict({
   serviceName: {
     doc: 'Applications Service Name',
     format: String,
-    default: 'book-live-animal-inspection-ui'
+    default: 'Book a live animal inspection'
   },
   root: {
     doc: 'Project root',
