@@ -1,10 +1,16 @@
 {% extends "govuk/template.njk" %}
 
 {% from "page-body/macro.njk" import appPageBody %}
-{% from "breadcrumbs/macro.njk" import appBreadcrumbs %}
-{% from "heading/macro.njk" import appHeading %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "button/macro.njk" import govukButton -%}
+{% from "govuk/components/radios/macro.njk" import govukRadios -%}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink -%}
+{% from "govuk/components/input/macro.njk" import govukInput -%}
 
-{% set mainClasses = "app-main-wrapper" %}
+
+
+
+{% set mainClasses = "govuk-main-wrapper" %}
 
 {% block headIcons %}
   <link rel="icon" sizes="48x48" href="{{ getAssetPath("images/favicon.ico") }}">
@@ -16,18 +22,26 @@
 
 {% block head %}
   <link href="{{ getAssetPath('application.css') }}" rel="stylesheet">
+    <!-- Google tag (gtag.js) --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{googleSiteTagId}}"></script> 
+  <script>   window.dataLayer = window.dataLayer || [];   
+    function gtag(){dataLayer.push(arguments);}   
+    gtag('js', new Date());   
+    gtag('config', '{{googleSiteTagId}}'); 
+  </script>
 {% endblock %}
 
 {% block header %}
+{%if page != "home"%}
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk/",
     classes: "app-header",
     containerClasses: "govuk-width-container",
     serviceName: serviceName,
-    serviceUrl: serviceUrl,
-    useTudorCrown: true
+    serviceUrl: '/',
+    useTudorCrown: false
   }) }}
-  {% include "partials/navigation.njk" %}
+  {%endif%}
 {% endblock %}
 
 {% block pageTitle %}
@@ -35,10 +49,19 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {% if breadcrumbs.length > 1 %}
-    {{ appBreadcrumbs({
-      items: breadcrumbs
-    }) }}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Beta"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="/feedback">feedback</a> will help us to improve it.'
+  }) }}
+
+  {%if displayBacklink %}
+  <a href="{{backUrl}}" class="govuk-back-link">Back</a>
+   {{ govukBackLink({
+    text: "Back",
+    href: data['backUrl']
+  }) }}
   {% endif %}
 {% endblock %}
 
