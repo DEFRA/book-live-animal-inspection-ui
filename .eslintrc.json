@@ -23,7 +23,7 @@
   },
   "plugins": ["prettier", "jest", "jest-formatting"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": 0,
     "no-console": "error"
   },
   "ignorePatterns": [".server", ".public", "src/__fixtures__", "coverage"]
