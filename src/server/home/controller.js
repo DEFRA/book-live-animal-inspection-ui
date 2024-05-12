@@ -1,8 +1,17 @@
 const homeController = {
   handler: (request, h) => {
     return h.view('home/index', {
-      pageTitle: 'Home',
-      heading: 'Home'
+      pageTitle: 'Book a live animal inspection - GOV.UK ',
+      heading: 'Book a live animal inspection',
+      breadcrumbs: [
+        {
+          text: 'Home',
+          href: '/'
+        },
+        {
+          text: 'Example'
+        }
+      ]
     })
   }
 }
