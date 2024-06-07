@@ -1,13 +1,12 @@
 {% extends "govuk/template.njk" %}
 
 {% from "page-body/macro.njk" import appPageBody %}
-{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "heading/macro.njk" import appHeading -%}
 {% from "button/macro.njk" import govukButton -%}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% from "govuk/components/radios/macro.njk" import govukRadios -%}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink -%}
 {% from "govuk/components/input/macro.njk" import govukInput -%}
-
-
 
 
 {% set mainClasses = "govuk-main-wrapper" %}
@@ -57,10 +56,9 @@
   }) }}
 
   {%if displayBacklink %}
-  <a href="{{backUrl}}" class="govuk-back-link">Back</a>
    {{ govukBackLink({
     text: "Back",
-    href: data['backUrl']
+    href: backUrl
   }) }}
   {% endif %}
 {% endblock %}
