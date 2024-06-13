@@ -6,21 +6,27 @@
 {% endblock %}
 
 {% block content %}
- {% call appPageBody() %}
+  {% call appPageBody() %}
   <form action='location' method="get">
-  <div class="govuk-grid-row">
+    <div class="govuk-grid-row">
       <h1 class="govuk-heading-xl">
         {{ serviceName }}
       </h1>
-      
-      <p class="govuk-body">You need to book an inspection if you are importing live animals into Great Britain. Animals need to enter through the Sevington border control post.</p>
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-visually-hidden">Warning</span>
+
+      <p>You need to book an inspection if you are importing live animals into Great Britain. Inspections take place at these border control posts:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Sevington, England</li>
+        <li>Fishguard, Wales</li>
+        <li>Pembroke Dock, Wales</li>
+        <li>Holyhead, Wales</li>
+      </ul>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
     You must book a separate inspection for each vehicle you are transporting.
   </strong>
-</div>
+      </div>
       <p>To book an inspection, you need to know the:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>Type of vehicle you will use</li>
@@ -29,10 +35,9 @@
         <li>Estimated date of arrival</li>
       </ul>
 
- {{ govukButton({
+      {{ govukButton({
         text: "Start now"
       }) }}
-</div>
-{% endcall %}
-{% endblock %}
-
+    </div>
+    {% endcall %}
+  {% endblock %}

@@ -3,6 +3,7 @@ const homeController = {
     return h.view('home/index', {
       pageTitle: 'Book a live animal inspection - GOV.UK ',
       heading: 'Book a live animal inspection',
+      page: 'home',
       breadcrumbs: [
         {
           text: 'Home',
