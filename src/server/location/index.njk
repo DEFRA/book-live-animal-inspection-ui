@@ -9,8 +9,8 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="/vehicleDetails" method="get">
         {{ govukRadios({
-          name: "WhichBorderControlFacility",
-          value: data['WhichBorderControlFacility'],
+          name: "locationOption",
+          value: data['locationOption'],
           fieldset: {
             legend: {
               text: "Which border control post are you going to?",
@@ -18,16 +18,7 @@
               classes: "govuk-fieldset__legend--l"
             }
           },
-          items: [
-            {
-              value: "Sevington",
-              text: "Sevington, England"
-            },
-            {
-              value: "Holyhead",
-              text: "Holyhead, Wales"
-            }
-          ]
+          items: locations
         }) }}
 
         {{ govukButton({
