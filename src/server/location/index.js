@@ -6,7 +6,7 @@ const location = {
     register: async (server) => {
       server.route([
         {
-          method: 'GET',
+          method: ['GET', 'POST'],
           path: '/location',
           ...locationController
         }

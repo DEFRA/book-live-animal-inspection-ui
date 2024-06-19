@@ -6,10 +6,22 @@ const locationController = {
       { value: 3, text: 'Pembroke Dock, Wales' },
       { value: 4, text: 'Holyhead, Wales' }
     ]
+
+    let error
+    if (request.method === 'post') {
+      const { locationOption } = request.payload
+      if (!locationOption || locationOption.trim() === '') {
+        error = 'This field is required'
+      } else {
+        return h.redirect('/vehicleDetails')
+      }
+    }
+
     return h.view('location/index', {
       pageTitle: 'Book a live animal inspection - GOV.UK',
       heading: 'Book a live animal inspection',
       locations,
+      error,
       breadcrumbs: [
         {
           text: 'Back',
