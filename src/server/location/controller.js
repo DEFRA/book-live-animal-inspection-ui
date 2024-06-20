@@ -1,3 +1,5 @@
+import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
+
 const locationController = {
   handler: (request, h) => {
     const locations = [
@@ -7,12 +9,16 @@ const locationController = {
       { value: 4, text: 'Holyhead, Wales' }
     ]
 
-    let error
+    let error = ''
+    const slotBookingParameters = {}
     if (request.method === 'post') {
       const { locationOption } = request.payload
       if (!locationOption || locationOption.trim() === '') {
         error = 'Select a border control post'
       } else {
+        slotBookingParameters.SiteId = locationOption
+        const redisClient = buildRedisClient()
+        redisClient.set('locationId', slotBookingParameters)
         return h.redirect('/vehicleDetails')
       }
     }
