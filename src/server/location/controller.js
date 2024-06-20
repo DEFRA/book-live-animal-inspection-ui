@@ -11,14 +11,14 @@ const locationController = {
     if (request.method === 'post') {
       const { locationOption } = request.payload
       if (!locationOption || locationOption.trim() === '') {
-        error = 'This field is required'
+        error = 'Select a border control post'
       } else {
         return h.redirect('/vehicleDetails')
       }
     }
 
     return h.view('location/index', {
-      pageTitle: 'Book a live animal inspection - GOV.UK',
+      pageTitle: 'Location - Book a live animal inspection',
       heading: 'Book a live animal inspection',
       locations,
       error,
