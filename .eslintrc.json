@@ -26,5 +26,11 @@
     "prettier/prettier": 0,
     "no-console": "error"
   },
-  "ignorePatterns": [".server", ".public", "src/__fixtures__", "coverage"]
+  "ignorePatterns": [
+    "src/client/assets/javascripts/components/accessible-autocomplete.min.js",
+    ".server",
+    ".public",
+    "src/__fixtures__",
+    "coverage"
+  ]
 }

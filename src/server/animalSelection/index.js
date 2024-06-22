@@ -1,4 +1,7 @@
-import { animalSelectionController } from '~/src/server/animalSelection/controller'
+import {
+  animalSelectionController,
+  animalReferenceDataController
+} from '~/src/server/animalSelection/controller'
 
 const animalSelection = {
   plugin: {
@@ -9,6 +12,11 @@ const animalSelection = {
           method: 'GET',
           path: '/animalSelection',
           ...animalSelectionController
+        },
+        {
+          method: 'GET',
+          path: '/animalReferenceData',
+          ...animalReferenceDataController
         }
       ])
     }
