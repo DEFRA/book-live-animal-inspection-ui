@@ -9,7 +9,7 @@ const animalSelection = {
     register: async (server) => {
       server.route([
         {
-          method: 'GET',
+          method: ['GET', 'POST'],
           path: '/animalSelection',
           ...animalSelectionController
         },

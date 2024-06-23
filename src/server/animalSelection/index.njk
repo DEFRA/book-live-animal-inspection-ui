@@ -1,35 +1,62 @@
 {% extends 'layouts/page.njk' %}
 {% set displayBacklink = true %}
-{% set backUrl = "/vehicleDetails" %}
 {% set pageTitle = "Animal species" %}
 
 {% block content %}
   {% call appPageBody() %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/animalNumber" method="get">
-        {{ govukInput({
-            label: {
-              text: "What animal species are you transporting?",
-              classes: "govuk-label--l",
-              isPageHeading: true
-            },
-            hint: {
-              text: "You can add multiple animal species."
-            },
-            id: "animal-type",
-            name: "eventName"
+      <form action="/animalSelection" method="post">
+        {% if error %}
+          {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
         }) }}
-
-        <label for="my-autocomplete">Select your country</label>
-<div id="animal-selection-container"></div>
-
-        {{ govukButton({
+          {%endif%}
+          {% if error %}
+            <div class="govuk-form-group govuk-form-group--error">
+              <fieldset class="govuk-fieldset" role="group" aria-describedby="animalSelection-hint animalSelection-error">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                  <h1 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--l" for="animalSelection">
+                What animal species are you transporting?
+            </label>
+                  </h1>
+                </legend>
+                <div id="animalSelection-hint" class="govuk-hint">
+                  Animal species
+                </div>
+                <p id="animalSelection-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span>
+                  {{error}}
+                </p>
+                <div id="animal-selection-container"></div>
+              </fieldset>
+            </div>
+            {%else%}
+            <fieldset class="govuk-fieldset">
+              <h1 class="govuk-label-wrapper">
+                <label class="govuk-label govuk-label--l" for="animalSelection">
+                 What animal species are you transporting?
+                </label>
+              </h1>
+              <div id="animalSelection-hint" class="govuk-hint">
+                Animal species
+              </div>
+              <div id="animal-selection-container"></div>
+            </fieldset>
+          {%endif%}
+            <br>
+            {{ govukButton({
           text: "Save and continue"
         }) }}
-      </form>
-    </div>
-  </div>
-  {% endcall %}
-{% endblock %}
-
+          </form>
+        </div>
+      </div>
+      {% endcall %}
+    {% endblock %}

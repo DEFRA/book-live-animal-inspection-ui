@@ -10,16 +10,14 @@ const locationController = {
     ]
 
     let error = ''
-    const slotBookingParameters = {}
     if (request.method === 'post') {
       const { locationOption } = request.payload
       if (!locationOption || locationOption.trim() === '') {
         error = 'Select a border control post'
       } else {
-        slotBookingParameters.SiteId = locationOption
         const redisClient = buildRedisClient()
-        redisClient.set('locationId', slotBookingParameters)
-        return h.redirect('/vehicleDetails')
+        redisClient.set('locationOption', locationOption)
+        return h.redirect('/animalSelection')
       }
     }
 
@@ -28,6 +26,7 @@ const locationController = {
       heading: 'Book a live animal inspection',
       locations,
       error,
+      backUrl: '/',
       breadcrumbs: [
         {
           text: 'Back',

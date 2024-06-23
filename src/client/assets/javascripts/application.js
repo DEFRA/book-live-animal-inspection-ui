@@ -15,7 +15,7 @@ initAll()
 
 accessibleAutocomplete({
   element: document.querySelector('#animal-selection-container'),
-  id: 'autocomplete', // To match it to the label
+  id: 'animalSelection',
   source: function (query, populateResults) {
     fetch(`/animalReferenceData?q=${query}`)
       .then((response) => response.json())

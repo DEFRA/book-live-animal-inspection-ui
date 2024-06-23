@@ -6,7 +6,7 @@ const vehicleDetailsController = {
       breadcrumbs: [
         {
           text: 'Back',
-          href: '/'
+          href: '/animalSelection'
         },
         {
           text: 'Example'
