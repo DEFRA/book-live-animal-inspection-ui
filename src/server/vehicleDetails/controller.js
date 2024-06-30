@@ -1,4 +1,3 @@
-import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
 import { optionsData } from '~/src/server/data/optionsData.js'
 import { errorMessages } from '~/src/server/data/errorMessages.js'
 
@@ -29,8 +28,7 @@ const vehicleDetailsController = {
           })
         }
 
-        const redisClient = buildRedisClient()
-        redisClient.set('vehicleTypeOption', vehicleTypeOption)
+        request.yar.set('vehicleTypeOption', vehicleTypeOption)
         return h.redirect('/')
       }
     }
@@ -62,8 +60,7 @@ const vehicleUnloadTypeController = {
       if (!unloadTypeOption || unloadTypeOption.trim() === '') {
         error = errorMessages.vehicleUnloadSelectionRequired
       } else {
-        const redisClient = buildRedisClient()
-        redisClient.set('unloadTypeOption', unloadTypeOption)
+        request.yar.set('unloadTypeOption', unloadTypeOption)
         return h.redirect('/')
       }
     }

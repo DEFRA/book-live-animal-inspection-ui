@@ -73,6 +73,13 @@ const config = convict({
     default: null,
     env: 'CDP_HTTPS_PROXY'
   },
+  sessionCookiePassword: {
+    doc: 'session password for  cookie',
+    format: '*',
+    default: 'the-password-must-be-at-least-32-characters-long',
+    sensitive: true,
+    env: 'SESSION_COOKIE_PASSWORD'
+  },
   redis: {
     enabled: {
       doc: 'Enable Redis on your Frontend. Before you enable Redis, contact the CDP platform team as we need to set up config so you can run Redis in CDP environments',

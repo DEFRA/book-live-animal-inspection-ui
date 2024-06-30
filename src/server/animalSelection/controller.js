@@ -1,4 +1,3 @@
-import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
 import { errorMessages } from '~/src/server/data/errorMessages.js'
 
 const animalSelectionController = {
@@ -9,8 +8,7 @@ const animalSelectionController = {
       if (!animalSelection || animalSelection.trim() === '') {
         error = errorMessages.animalNameSelectionRequired
       } else {
-        const redisClient = buildRedisClient()
-        redisClient.set('animalSelection', animalSelection)
+        request.yar.set('animalSelection', animalSelection)
         return h.redirect('/vehicleDetails')
       }
     }

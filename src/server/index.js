@@ -7,8 +7,12 @@ import { router } from './router'
 import { requestLogger } from '~/src/server/common/helpers/logging/request-logger'
 import { catchAll } from '~/src/server/common/helpers/errors'
 import { secureContext } from '~/src/server/common/helpers/secure-context'
+import { buildRedisClient } from '~/src/server/common/helpers/redis-client'
+import { Engine as CatboxRedis } from '@hapi/catbox-redis'
+import { Engine as CatboxMemory } from '@hapi/catbox-memory'
 
 const isProduction = config.get('isProduction')
+const redisEnabled = config.get('redis.enabled')
 
 async function createServer() {
   const server = hapi.server({
@@ -35,7 +39,17 @@ async function createServer() {
     },
     router: {
       stripTrailingSlash: true
-    }
+    },
+    cache: [
+      {
+        name: 'session',
+        engine: redisEnabled
+          ? new CatboxRedis({
+              client: buildRedisClient()
+            })
+          : new CatboxMemory()
+      }
+    ]
   })
 
   await server.register(requestLogger)

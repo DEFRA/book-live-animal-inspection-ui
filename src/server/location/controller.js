@@ -1,4 +1,3 @@
-import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
 import { optionsData } from '~/src/server/data/optionsData.js'
 import { errorMessages } from '~/src/server/data/errorMessages.js'
 
@@ -10,8 +9,7 @@ const locationController = {
       if (!locationOption || locationOption.trim() === '') {
         error = errorMessages.siteSelectionRequired
       } else {
-        const redisClient = buildRedisClient()
-        redisClient.set('locationOption', locationOption)
+        request.yar.set('locationOption', locationOption)
         return h.redirect('/animalSelection')
       }
     }
