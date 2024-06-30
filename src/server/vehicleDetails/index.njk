@@ -1,49 +1,61 @@
 {% extends 'layouts/page.njk' %}
 {% set displayBacklink = true %}
-{% set backUrl = "/location" %}
-{% set pageTitle = " type" %}
 
 {% block content %}
   {% call appPageBody() %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form action="/animalSelection" method="get" novalidate>
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            {{ govukRadios({
-                      name: "whereDoYouLive",
-                      fieldset: {
-                        legend: {
-                          text: "What type of vehicle will you use?",
-                          isPageHeading: true,
-                          classes: "govuk-fieldset__legend--l"
-                        }
-                      },
-                      hint: {
-                        text: "You must book a separate inspection for each vehicle."
-                      },
-                      items: [
-                        {
-                          value: "1",
-                          text: "Class B: car or small van",
-                          id: "testid"
-                        },
-                        {
-                          value: "2",
-                          text: "Class C1: large van up to 7.5 tonnes"
-                        },
-                        {
-                          value: "3",
-                          text: "Class C: heavy goods vehicle over 7.5 tonnes"
-                        },
-                        {
-                          value: "4",
-                          text: "Class CE: heavy goods vehicle over 7.5 tonnes towing a trailer"
-                        }
-                      ]
-                                }) }}
-          </fieldset>
-        </div>
+      <form action="/vehicleDetails" method="post">
+
+        {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+      {%endif%}
+
+        {% if error %}
+          {{ govukRadios({
+          name: "vehicleTypeOption",
+          value: data['vehicleTypeOption'],
+          fieldset: {
+            legend: {
+              text: "What type of vehicle will you use??",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+           text: "You must book a separate inspection for each vehicle."
+          },
+          items: vehicleTypes,
+          errorMessage: {
+          text: 'Select a border control post'
+          }
+        }) }}
+        {%else%}
+          {{ govukRadios({
+          name: "vehicleTypeOption",
+          value: data['vehicleTypeOption'],
+          fieldset: {
+            legend: {
+              text: "What type of vehicle will you use??",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+           hint: {
+           text: "You must book a separate inspection for each vehicle."
+          },
+          items: vehicleTypes
+        }) }}
+        {%endif%}
+
         {{ govukButton({
           text: "Save and continue"
         }) }}
@@ -52,3 +64,4 @@
   </div>
   {% endcall %}
 {% endblock %}
+

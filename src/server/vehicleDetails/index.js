@@ -6,7 +6,7 @@ const vehicleDetails = {
     register: async (server) => {
       server.route([
         {
-          method: 'GET',
+          method: ['GET', 'POST'],
           path: '/vehicleDetails',
           ...vehicleDetailsController
         }
