@@ -1,5 +1,7 @@
-import { vehicleDetailsController } from '~/src/server/vehicleDetails/controller'
-
+import {
+  vehicleDetailsController,
+  vehicleUnloadTypeController
+} from '~/src/server/vehicleDetails/controller'
 const vehicleDetails = {
   plugin: {
     name: 'vehicleDetails',
@@ -9,6 +11,11 @@ const vehicleDetails = {
           method: ['GET', 'POST'],
           path: '/vehicleDetails',
           ...vehicleDetailsController
+        },
+        {
+          method: ['GET', 'POST'],
+          path: '/vehicleUnloadType',
+          ...vehicleUnloadTypeController
         }
       ])
     }

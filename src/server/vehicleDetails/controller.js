@@ -1,5 +1,9 @@
 import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
-
+const vehicleUnloadTypes = [
+  { value: 1, text: 'Rear-unloading vehicle' },
+  { value: 2, text: 'Side-unloading vehicle' },
+  { value: 3, text: 'Vehicle can be unloaded from the rear or the side' }
+]
 const vehicleDetailsController = {
   handler: (request, h) => {
     const vehicleTypes = [
@@ -18,6 +22,25 @@ const vehicleDetailsController = {
       if (!vehicleTypeOption || vehicleTypeOption.trim() === '') {
         error = 'Select a vehicle type'
       } else {
+        if (vehicleTypeOption === '3' || vehicleTypeOption === '4') {
+          return h.view('vehicleDetails/vehicleUnloadType', {
+            pageTitle: 'Vehicle unload type - Book a live animal inspection',
+            heading: 'Book a live animal inspection',
+            vehicleUnloadTypes,
+            error,
+            backUrl: '/vehicleDetails',
+            breadcrumbs: [
+              {
+                text: 'Back',
+                href: '/'
+              },
+              {
+                text: 'Home'
+              }
+            ]
+          })
+        }
+
         const redisClient = buildRedisClient()
         redisClient.set('vehicleTypeOption', vehicleTypeOption)
         return h.redirect('/')
@@ -43,4 +66,37 @@ const vehicleDetailsController = {
   }
 }
 
-export { vehicleDetailsController }
+const vehicleUnloadTypeController = {
+  handler: (request, h) => {
+    let error = ''
+    if (request.method === 'post') {
+      const { unloadTypeOption } = request.payload
+      if (!unloadTypeOption || unloadTypeOption.trim() === '') {
+        error = 'Select a vehicle unload type'
+      } else {
+        const redisClient = buildRedisClient()
+        redisClient.set('unloadTypeOption', unloadTypeOption)
+        return h.redirect('/')
+      }
+    }
+
+    return h.view('vehicleDetails/vehicleUnloadType', {
+      pageTitle: 'Vehicle unload type - Book a live animal inspection',
+      heading: 'Book a live animal inspection',
+      vehicleUnloadTypes,
+      error,
+      backUrl: '/vehicleDetails',
+      breadcrumbs: [
+        {
+          text: 'Back',
+          href: '/'
+        },
+        {
+          text: 'Home'
+        }
+      ]
+    })
+  }
+}
+
+export { vehicleDetailsController, vehicleUnloadTypeController }

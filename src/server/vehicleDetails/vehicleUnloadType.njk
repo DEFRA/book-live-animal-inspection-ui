@@ -1,0 +1,61 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/vehicleUnloadType" method="post">
+
+        {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+      {%endif%}
+
+        {% if error %}
+          {{ govukRadios({
+          name: "unloadTypeOption",
+          value: data['unloadTypeOption'],
+          fieldset: {
+            legend: {
+              text: "Does your vehicle unload from the rear or the side?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: vehicleUnloadTypes,
+          errorMessage: {
+          text: error
+          }
+        }) }}
+        {%else%}
+          {{ govukRadios({
+          name: "unloadTypeOption",
+          value: data['unloadTypeOption'],
+          fieldset: {
+            legend: {
+              text: "Does your vehicle unload from the rear or the side?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: vehicleUnloadTypes
+        }) }}
+        {%endif%}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+
