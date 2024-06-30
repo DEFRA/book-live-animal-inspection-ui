@@ -1,32 +1,20 @@
 import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
-const vehicleUnloadTypes = [
-  { value: 1, text: 'Rear-unloading vehicle' },
-  { value: 2, text: 'Side-unloading vehicle' },
-  { value: 3, text: 'Vehicle can be unloaded from the rear or the side' }
-]
+import { optionsData } from '~/src/server/data/optionsData.js'
+import { errorMessages } from '~/src/server/data/errorMessages.js'
+
 const vehicleDetailsController = {
   handler: (request, h) => {
-    const vehicleTypes = [
-      { value: 1, text: 'Class B: car or small van' },
-      { value: 2, text: 'Class C1: large van up to 7.5 tonnes' },
-      { value: 3, text: 'Class C: heavy goods vehicle over 7.5 tonnes' },
-      {
-        value: 4,
-        text: 'Class CE: heavy goods vehicle over 7.5 tonnes towing a trailer'
-      }
-    ]
-
     let error = ''
     if (request.method === 'post') {
       const { vehicleTypeOption } = request.payload
       if (!vehicleTypeOption || vehicleTypeOption.trim() === '') {
-        error = 'Select a vehicle type'
+        error = errorMessages.vehicleSelectionRequired
       } else {
         if (vehicleTypeOption === '3' || vehicleTypeOption === '4') {
           return h.view('vehicleDetails/vehicleUnloadType', {
             pageTitle: 'Vehicle unload type - Book a live animal inspection',
             heading: 'Book a live animal inspection',
-            vehicleUnloadTypes,
+            vehicleUnloadTypes: optionsData.vehicleUnloadTypes,
             error,
             backUrl: '/vehicleDetails',
             breadcrumbs: [
@@ -50,7 +38,7 @@ const vehicleDetailsController = {
     return h.view('vehicleDetails/index', {
       pageTitle: 'VehicleDetails - Book a live animal inspection',
       heading: 'Book a live animal inspection',
-      vehicleTypes,
+      vehicleTypes: optionsData.vehicleTypes,
       error,
       backUrl: '/animalSelection',
       breadcrumbs: [
@@ -72,7 +60,7 @@ const vehicleUnloadTypeController = {
     if (request.method === 'post') {
       const { unloadTypeOption } = request.payload
       if (!unloadTypeOption || unloadTypeOption.trim() === '') {
-        error = 'Select a vehicle unload type'
+        error = errorMessages.vehicleUnloadSelectionRequired
       } else {
         const redisClient = buildRedisClient()
         redisClient.set('unloadTypeOption', unloadTypeOption)
@@ -83,7 +71,7 @@ const vehicleUnloadTypeController = {
     return h.view('vehicleDetails/vehicleUnloadType', {
       pageTitle: 'Vehicle unload type - Book a live animal inspection',
       heading: 'Book a live animal inspection',
-      vehicleUnloadTypes,
+      vehicleUnloadTypes: optionsData.vehicleUnloadTypes,
       error,
       backUrl: '/vehicleDetails',
       breadcrumbs: [

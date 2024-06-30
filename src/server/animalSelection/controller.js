@@ -1,4 +1,5 @@
 import { buildRedisClient } from '~/src/server/common/helpers/redis-client.js'
+import { errorMessages } from '~/src/server/data/errorMessages.js'
 
 const animalSelectionController = {
   handler: (request, h) => {
@@ -6,7 +7,7 @@ const animalSelectionController = {
     if (request.method === 'post') {
       const { animalSelection } = request.payload
       if (!animalSelection || animalSelection.trim() === '') {
-        error = 'Select an animal name'
+        error = errorMessages.animalNameSelectionRequired
       } else {
         const redisClient = buildRedisClient()
         redisClient.set('animalSelection', animalSelection)
