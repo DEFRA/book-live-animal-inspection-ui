@@ -9,6 +9,7 @@ const vehicleDetailsController = {
       if (!vehicleTypeOption || vehicleTypeOption.trim() === '') {
         error = errorMessages.vehicleSelectionRequired
       } else {
+        request.yar.set('vehicleTypeOption', vehicleTypeOption)
         if (vehicleTypeOption === '3' || vehicleTypeOption === '4') {
           return h.view('vehicleDetails/vehicleUnloadType', {
             pageTitle: 'Vehicle unload type - Book a live animal inspection',
@@ -27,8 +28,6 @@ const vehicleDetailsController = {
             ]
           })
         }
-
-        request.yar.set('vehicleTypeOption', vehicleTypeOption)
         return h.redirect('/')
       }
     }
