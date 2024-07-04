@@ -4,12 +4,12 @@ const animalSelectionController = {
   handler: (request, h) => {
     let error = ''
     if (request.method === 'post') {
-      const { animalSelection } = request.payload
+      const { 'input-autocomplete': animalSelection } = request.payload
       if (!animalSelection || animalSelection.trim() === '') {
         error = errorMessages.animalNameSelectionRequired
       } else {
         request.yar.set('animalSelection', animalSelection)
-        return h.redirect('/vehicleDetails')
+        return h.redirect('/animalCount')
       }
     }
 
@@ -18,6 +18,7 @@ const animalSelectionController = {
       heading: 'Book a live animal inspection',
       page: 'animalSelection',
       error,
+      animalSelection: request.yar.get('animalSelection'),
       backUrl: '/location',
       breadcrumbs: [
         {

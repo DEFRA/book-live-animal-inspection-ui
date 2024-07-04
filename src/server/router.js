@@ -7,6 +7,7 @@ import { signIn } from '~/src/server/signIn'
 import { vehicleDetails } from '~/src/server/vehicleDetails'
 import { location } from '~/src/server/location'
 import { animalSelection } from '~/src/server/animalSelection'
+import { animalCount } from '~/src/server/animalCount'
 import { serveStaticFiles } from '~/src/server/common/helpers/serve-static-files'
 import { config } from '~/src/config'
 
@@ -38,6 +39,7 @@ const router = {
         vehicleDetails,
         location,
         animalSelection,
+        animalCount,
         serveStaticFiles
       ])
       await server.register({

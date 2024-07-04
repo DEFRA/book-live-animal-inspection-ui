@@ -19,6 +19,7 @@ const locationController = {
       heading: 'Book a live animal inspection',
       locations: optionsData.locations,
       error,
+      locationOption: request.yar.get('locationOption'),
       backUrl: '/',
       breadcrumbs: [
         {

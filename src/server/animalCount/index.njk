@@ -1,0 +1,67 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+{% set pageTitle = "Animal species" %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/animalCount" method="post">
+        {% if error %}
+          {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }}
+          {%endif%}
+          {% if error %}
+            <h1 class="govuk-heading-l">
+                  How many animals are you transporting?
+             </h1>
+            {{ govukInput({
+              label: {
+                text: "Number of animals"
+              },
+               hint: {
+               text: "This can be an estimate."
+               },
+              classes: "govuk-input--width-2",
+              id: "animalCount",
+              
+              name: "animalCount",
+               errorMessage: {
+                text: error
+               }
+            }) }}
+            {%else%}
+              <h1 class="govuk-heading-l">
+                  How many animals are you transporting?
+             </h1>
+            {{ govukInput({
+              label: {
+                text: "Number of animals"
+              },
+               hint: {
+               text: "This can be an estimate."
+               },
+                attributes: {
+                  "maxlength": 4
+                },
+              classes: "govuk-input--width-3",
+              id: "animalCount",
+              name: "animalCount",
+              "value": animalCount
+            }) }}
+          {%endif%}
+            {{ govukButton({
+          text: "Save and continue"
+        }) }}
+          </form>
+        </div>
+      </div>
+      {% endcall %}
+    {% endblock %}

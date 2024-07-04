@@ -37,7 +37,7 @@ const vehicleDetailsController = {
       heading: 'Book a live animal inspection',
       vehicleTypes: optionsData.vehicleTypes,
       error,
-      backUrl: '/animalSelection',
+      backUrl: '/animalCount',
       breadcrumbs: [
         {
           text: 'Back',
