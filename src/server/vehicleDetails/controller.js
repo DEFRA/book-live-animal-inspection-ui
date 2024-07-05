@@ -15,6 +15,7 @@ const vehicleDetailsController = {
             pageTitle: 'Vehicle unload type - Book a live animal inspection',
             heading: 'Book a live animal inspection',
             vehicleUnloadTypes: optionsData.vehicleUnloadTypes,
+            unloadTypeOption: request.yar.get('unloadTypeOption'),
             error,
             backUrl: '/vehicleDetails',
             breadcrumbs: [
@@ -36,6 +37,7 @@ const vehicleDetailsController = {
       pageTitle: 'VehicleDetails - Book a live animal inspection',
       heading: 'Book a live animal inspection',
       vehicleTypes: optionsData.vehicleTypes,
+      vehicleTypeOption: request.yar.get('vehicleTypeOption'),
       error,
       backUrl: '/animalCount',
       breadcrumbs: [
@@ -68,6 +70,7 @@ const vehicleUnloadTypeController = {
       pageTitle: 'Vehicle unload type - Book a live animal inspection',
       heading: 'Book a live animal inspection',
       vehicleUnloadTypes: optionsData.vehicleUnloadTypes,
+      unloadTypeOption: request.yar.get('unloadTypeOption'),
       error,
       backUrl: '/vehicleDetails',
       breadcrumbs: [

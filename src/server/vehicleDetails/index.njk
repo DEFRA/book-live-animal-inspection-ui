@@ -22,7 +22,7 @@
         {% if error %}
           {{ govukRadios({
           name: "vehicleTypeOption",
-          value: data['vehicleTypeOption'],
+          value: vehicleTypeOption,
           fieldset: {
             legend: {
               text: "What type of vehicle will you use??",
@@ -41,7 +41,7 @@
         {%else%}
           {{ govukRadios({
           name: "vehicleTypeOption",
-          value: data['vehicleTypeOption'],
+          value: vehicleTypeOption,
           fieldset: {
             legend: {
               text: "What type of vehicle will you use?",

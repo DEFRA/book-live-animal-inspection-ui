@@ -99,25 +99,26 @@
 
   {% block bodyEnd %}
     <script src="{{ getAssetPath('application.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/accessible-autocomplete@3.0.0/dist/accessible-autocomplete.min.js"></script>
-    
-    <script>
-    document.addEventListener("DOMContentLoaded", function()
-{
-accessibleAutocomplete({
-  element: document.querySelector('#animal-selection-container'),
-  id: 'animalSelection',
-  defaultValue: '{{animalSelection}}',
-  source: function (query, populateResults) {
-    fetch(`/animalReferenceData?q=${query}`)
-      .then((response) => response.json())
-      .then((data) => {
-        populateResults(data)
-      })
-  },
-  minLength: 2 // Minimum characters to trigger the autocomplete
-})});
+      {%if page == "animalSelection"%}
+        <script src="https://cdn.jsdelivr.net/npm/accessible-autocomplete@3.0.0/dist/accessible-autocomplete.min.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function()
+      {
+        accessibleAutocomplete({
+          element: document.querySelector('#animal-selection-container'),
+          id: 'animalSelection',
+          defaultValue: '{{animalSelection}}',
+          source: function (query, populateResults) {
+            fetch(`/animalReferenceData?q=${query}`)
+              .then((response) => response.json())
+              .then((data) => {
+                populateResults(data)
+              })
+          },
+          minLength: 2 // Minimum characters to trigger the autocomplete
+        })});
 
-  </script>
+        </script>
 
+      {%endif%}
   {% endblock %}

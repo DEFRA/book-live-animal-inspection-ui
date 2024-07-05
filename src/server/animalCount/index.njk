@@ -29,10 +29,14 @@
                hint: {
                text: "This can be an estimate."
                },
-              classes: "govuk-input--width-2",
+               attributes: {
+                  "maxlength": 4
+                },
+              classes: "govuk-input--width-3",
               id: "animalCount",
               
               name: "animalCount",
+               "value": animalCount,
                errorMessage: {
                 text: error
                }
