@@ -1,5 +1,6 @@
-import { optionsData } from '~/src/server/data/optionsData.js'
-import { errorMessages } from '~/src/server/data/errorMessages.js'
+import { optionsData } from '~/src/server/common/data/optionsData.js'
+import { errorMessages } from '~/src/server/common/data/errorMessages.js'
+import { cacheKeys } from '~/src/server/common/data/cacheKeys'
 
 const locationController = {
   handler: (request, h) => {
@@ -9,7 +10,7 @@ const locationController = {
       if (!locationOption || locationOption.trim() === '') {
         error = errorMessages.siteSelectionRequired
       } else {
-        request.yar.set('locationOption', locationOption)
+        request.yar.set(cacheKeys.locationOption, locationOption)
         return h.redirect('/animalSelection')
       }
     }
@@ -19,7 +20,7 @@ const locationController = {
       heading: 'Book a live animal inspection',
       locations: optionsData.locations,
       error,
-      locationOption: request.yar.get('locationOption'),
+      locationOption: request.yar.get(cacheKeys.locationOption),
       backUrl: '/',
       breadcrumbs: [
         {
