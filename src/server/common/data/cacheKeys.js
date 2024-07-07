@@ -6,7 +6,9 @@ const cacheKeys = {
   unloadTypeOption: 'unloadTypeOption',
   arrivalDay: 'arrivalDay',
   arrivalMonth: 'arrivalMonth',
-  arrivalYear: 'arrivalYear'
+  arrivalYear: 'arrivalYear',
+  inspectionDateOption: 'inspectionDateOption',
+  inspectionTimeOption: 'inspectionTimeOption'
 }
 
 export { cacheKeys }

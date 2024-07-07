@@ -10,7 +10,9 @@ const errorMessages = {
   dateInFutureOnly: 'Date of arrival must be a future date',
   dateInvalid: 'Invalid date value',
   animalCountNumberOnly: 'Species count can only contain numbers.',
-  animalCountRequired: 'Enter a number'
+  animalCountRequired: 'Enter a number',
+  inspectionDateRequired: 'Choose inspection date',
+  inspectionTimeRequired: 'Choose inspection Time'
 }
 
 export { errorMessages }

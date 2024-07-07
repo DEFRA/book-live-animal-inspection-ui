@@ -1,4 +1,8 @@
-import { arrivalDateController } from '~/src/server/arrivalDate/controller'
+import {
+  arrivalDateController,
+  inspectionDateController,
+  inspectionTimeController
+} from '~/src/server/arrivalDate/controller'
 const arrivalDate = {
   plugin: {
     name: 'arrivalDate',
@@ -8,13 +12,17 @@ const arrivalDate = {
           method: ['GET', 'POST'],
           path: '/arrivalDate',
           ...arrivalDateController
+        },
+        {
+          method: ['GET', 'POST'],
+          path: '/inspectionDate',
+          ...inspectionDateController
+        },
+        {
+          method: ['GET', 'POST'],
+          path: '/inspectionTime',
+          ...inspectionTimeController
         }
-        // ,
-        // {
-        //   method: ['GET', 'POST'],
-        //   path: '/vehicleUnloadType',
-        //   ...vehicleUnloadTypeController
-        // }
       ])
     }
   }
