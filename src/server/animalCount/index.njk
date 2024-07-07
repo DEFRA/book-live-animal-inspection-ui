@@ -8,6 +8,8 @@
     <div class="govuk-grid-column-two-thirds">
       <form action="/animalCount" method="post">
         {% if error %}
+           {% set errorMessage = { text: error } %}
+           {% set errorClass = 'govuk-input--error' %}
           {{ govukErrorSummary({
           titleText: "There is a problem",
           errorList: [
@@ -17,30 +19,10 @@
             }
           ]
         }) }}
-          {%endif%}
-          {% if error %}
-            <h1 class="govuk-heading-l">
-                  How many animals are you transporting?
-             </h1>
-            {{ govukInput({
-              label: {
-                text: "Number of animals"
-              },
-               hint: {
-               text: "This can be an estimate."
-               },
-               attributes: {
-                  "maxlength": 4
-                },
-              classes: "govuk-input--width-3",
-              id: "animalCount",
-              name: "animalCount",
-               type: "number",
-               errorMessage: {
-                text: error
-               }
-            }) }}
-            {%else%}
+          {% else %}
+          {% set errorMessage = null %}
+       {% endif %}
+       
               <h1 class="govuk-heading-l">
                   How many animals are you transporting?
              </h1>
@@ -52,15 +34,15 @@
                text: "This can be an estimate."
                },
                 attributes: {
-                  "maxlength": 4
+                  "maxlength": "4"
                 },
               classes: "govuk-input--width-3",
               id: "animalCount",
               name: "animalCount",
-              type: "number",
-              "value": animalCount
+              "value": animalCount,
+               errorMessage: errorMessage
             }) }}
-          {%endif%}
+        
             {{ govukButton({
           text: "Save and continue"
         }) }}

@@ -1,5 +1,5 @@
 import { optionsData } from '~/src/server/common/data/optionsData.js'
-import { errorMessages } from '~/src/server/common/data/errorMessages.js'
+import { errorMessages } from '~/src/server/common/validations/errorMessages.js'
 import { cacheKeys } from '~/src/server/common/data/cacheKeys'
 
 const vehicleDetailsController = {
@@ -63,7 +63,7 @@ const vehicleUnloadTypeController = {
         error = errorMessages.vehicleUnloadSelectionRequired
       } else {
         request.yar.set(cacheKeys.unloadTypeOption, unloadTypeOption)
-        return h.redirect('/')
+        return h.redirect('/arrivalDate')
       }
     }
 

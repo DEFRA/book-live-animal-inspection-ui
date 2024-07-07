@@ -1,4 +1,4 @@
-import { errorMessages } from '~/src/server/common/data/errorMessages.js'
+import { errorMessages } from '~/src/server/common/validations/errorMessages.js'
 
 const animalSelectionController = {
   handler: (request, h) => {

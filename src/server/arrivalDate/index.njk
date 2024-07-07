@@ -1,0 +1,73 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/arrivalDate" method="post">
+        {% if error %}
+         {% set errorMessage = { text: error } %}
+          {% set errorClass = 'govuk-input--error' %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+        {% else %}
+          {% set errorMessage = null %}
+       {% endif %}
+      
+{{ govukDateInput({
+  id: "date-of-arrival",
+  fieldset: {
+    legend: {
+      text: "Estimated date of arrival",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  hint: {
+              text: "For example, 27 3 2027."
+        },
+  items: [
+    {
+      name: "day",
+      classes: "govuk-input--width-2 " ~ errorClass,
+      value: arrivalDate.day,
+     attributes: {
+                  "maxlength": 2
+                }
+    },
+    {
+      name: "month",
+      classes: "govuk-input--width-2 " ~ errorClass,
+      value: arrivalDate.month,
+      attributes: {
+                  "maxlength": 2
+                }
+    },
+    {
+      name: "year",
+      classes: "govuk-input--width-4 " ~ errorClass,
+      value: arrivalDate.year,
+      attributes: {
+                  "maxlength": 4
+                }
+    }
+  ],
+  errorMessage: errorMessage
+}) }}
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+

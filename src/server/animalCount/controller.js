@@ -1,4 +1,4 @@
-import { errorMessages } from '~/src/server/common/data/errorMessages.js'
+import { validators } from '~/src/server/common/validations/validations.js'
 import { cacheKeys } from '~/src/server/common/data/cacheKeys'
 
 const animalCountController = {
@@ -6,9 +6,10 @@ const animalCountController = {
     let error = ''
     if (request.method === 'post') {
       const { animalCount } = request.payload
-      if (!animalCount || animalCount.trim() === '') {
-        error = errorMessages.animalCountRequired
-      } else {
+
+      error = validators.validateAnimalCount(animalCount)
+
+      if (error === null) {
         request.yar.set(cacheKeys.animalCount, animalCount)
         return h.redirect('/vehicleDetails')
       }
@@ -20,6 +21,7 @@ const animalCountController = {
       heading: 'Book a live animal inspection',
       page: 'animalCount',
       error,
+      errorClass: '',
       animalCount: request.yar.get(cacheKeys.animalCount),
       backUrl: '/animalSelection',
       breadcrumbs: [
