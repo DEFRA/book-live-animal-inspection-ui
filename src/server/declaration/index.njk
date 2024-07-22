@@ -1,0 +1,57 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/declaration" method="post">
+
+        {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+      {%endif%}
+        <h1 class="govuk-heading-l">Declaration</h1>
+        <p class="govuk-body">
+          There are a limited number of inspections available at each border control post. It is important that you only book inspections that you need. Border control posts will be tracking misuse of bookings. 
+        </p>
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            I declare that I will not book more inspections than I need. I understand that doing so may result in penalty.
+          </strong>
+        </div>
+        {% if error %}
+          {{ govukRadios({
+          name: "declarationOption",
+          value: declarationOption,
+          items: declarationOptions,
+          errorMessage: {
+          text: error
+          }
+        }) }}
+        {%else%}
+          {{ govukRadios({
+          name: "declarationOption",
+          value: declarationOption,
+          items: declarationOptions
+        }) }}
+        {%endif%}
+
+        {{ govukButton({
+          text: "Confirm"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+

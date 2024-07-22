@@ -10,6 +10,7 @@ import { animalSelection } from '~/src/server/animalSelection'
 import { animalCount } from '~/src/server/animalCount'
 import { arrivalDate } from '~/src/server/arrivalDate'
 import { bookings } from '~/src/server/bookings'
+import { declaration } from '~/src/server/declaration'
 import { serveStaticFiles } from '~/src/server/common/helpers/serve-static-files'
 import { config } from '~/src/config'
 
@@ -44,6 +45,7 @@ const router = {
         animalCount,
         arrivalDate,
         bookings,
+        declaration,
         serveStaticFiles
       ])
       await server.register({

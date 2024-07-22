@@ -18,6 +18,10 @@ const optionsData = {
     { value: 1, text: 'Rear-unloading vehicle' },
     { value: 2, text: 'Side-unloading vehicle' },
     { value: 3, text: 'Vehicle can be unloaded from the rear or the side' }
+  ],
+  declarationOptions: [
+    { value: 1, text: 'Yes, I understand and agree' },
+    { value: 2, text: 'No, I do not wish to continue' }
   ]
 }
 

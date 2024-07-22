@@ -12,7 +12,8 @@ const errorMessages = {
   animalCountNumberOnly: 'Species count can only contain numbers.',
   animalCountRequired: 'Enter a number',
   inspectionDateRequired: 'Choose inspection date',
-  inspectionTimeRequired: 'Choose inspection Time'
+  inspectionTimeRequired: 'Choose inspection Time',
+  declarationOptionRequired: 'Choose declaration option'
 }
 
 export { errorMessages }

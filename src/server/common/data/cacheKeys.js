@@ -8,7 +8,8 @@ const cacheKeys = {
   arrivalMonth: 'arrivalMonth',
   arrivalYear: 'arrivalYear',
   inspectionDateOption: 'inspectionDateOption',
-  inspectionTimeOption: 'inspectionTimeOption'
+  inspectionTimeOption: 'inspectionTimeOption',
+  declarationOption: 'declarationOption'
 }
 
 export { cacheKeys }

@@ -5,7 +5,7 @@
   {% call appPageBody() %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <form action="/upcomingBookings" method="get">
+      <form action="/declaration" method="get">
         {% from "govuk/components/table/macro.njk" import govukTable %}
           {{ govukTable({
             caption: "Your upcoming inspections",
@@ -20,6 +20,9 @@
               { text: "Cancel"}
           ],
           rows: data
+        }) }}
+         {{ govukButton({
+          text: "Book another inspection"
         }) }}
           </form>
         </div>
