@@ -118,7 +118,7 @@ const inspectionTimeController = {
         error = errorMessages.inspectionTimeRequired
       } else {
         request.yar.set(cacheKeys.inspectionTimeOption, inspectionTimeOption)
-        return h.redirect('/')
+        return h.redirect('/checkBookingDetails')
       }
     }
 
