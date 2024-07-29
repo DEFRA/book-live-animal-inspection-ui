@@ -1,15 +1,31 @@
 import { errorMessages } from '~/src/server/common/validations/errorMessages.js'
+import { clearCacheKeys } from '~/src/server/common/helpers/cache-management'
+import { cacheKeys } from '~/src/server/common/data/cacheKeys'
 
 const animalSelectionController = {
   handler: (request, h) => {
     let error = ''
+    let redirectRoute = request.query.route
     if (request.method === 'post') {
-      const { 'input-autocomplete': animalSelection } = request.payload
+      const { 'input-autocomplete': animalSelection, route } = request.payload
+      redirectRoute = route
       if (!animalSelection || animalSelection.trim() === '') {
         error = errorMessages.animalNameSelectionRequired
       } else {
         request.yar.set('animalSelection', animalSelection)
-        return h.redirect('/animalCount')
+
+        if (redirectRoute === 'checkBookingDetails') {
+          clearCacheKeys(request, [
+            cacheKeys.arrivalDay,
+            cacheKeys.arrivalMonth,
+            cacheKeys.arrivalYear,
+            cacheKeys.inspectionDateOption,
+            cacheKeys.inspectionTimeOption
+          ])
+          return h.redirect('/arrivalDate')
+        } else {
+          return h.redirect('/animalCount')
+        }
       }
     }
 
@@ -20,15 +36,7 @@ const animalSelectionController = {
       error,
       animalSelection: request.yar.get('animalSelection'),
       backUrl: '/location',
-      breadcrumbs: [
-        {
-          text: 'Back',
-          href: '/'
-        },
-        {
-          text: 'Example'
-        }
-      ]
+      route: redirectRoute
     })
   }
 }

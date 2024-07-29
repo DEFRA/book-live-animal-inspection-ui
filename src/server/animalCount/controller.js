@@ -4,14 +4,19 @@ import { cacheKeys } from '~/src/server/common/data/cacheKeys'
 const animalCountController = {
   handler: (request, h) => {
     let error = ''
+    let redirectRoute = request.query.route
     if (request.method === 'post') {
-      const { animalCount } = request.payload
-
+      const { animalCount, route } = request.payload
+      redirectRoute = route
       error = validators.validateAnimalCount(animalCount)
 
       if (error === null) {
         request.yar.set(cacheKeys.animalCount, animalCount)
-        return h.redirect('/vehicleDetails')
+        if (route === 'checkBookingDetails') {
+          return h.redirect('/checkBookingDetails')
+        } else {
+          return h.redirect('/vehicleDetails')
+        }
       }
     }
 
@@ -24,15 +29,7 @@ const animalCountController = {
       errorClass: '',
       animalCount: request.yar.get(cacheKeys.animalCount),
       backUrl: '/animalSelection',
-      breadcrumbs: [
-        {
-          text: 'Back',
-          href: '/'
-        },
-        {
-          text: 'Example'
-        }
-      ]
+      route: redirectRoute
     })
   }
 }

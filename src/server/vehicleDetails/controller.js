@@ -1,15 +1,25 @@
 import { optionsData } from '~/src/server/common/data/optionsData.js'
 import { errorMessages } from '~/src/server/common/validations/errorMessages.js'
 import { cacheKeys } from '~/src/server/common/data/cacheKeys'
+import { clearCacheKeys } from '~/src/server/common/helpers/cache-management'
 
 const vehicleDetailsController = {
   handler: (request, h) => {
     let error = ''
     if (request.method === 'post') {
-      const { vehicleTypeOption } = request.payload
+      const { vehicleTypeOption, route } = request.payload
       if (!vehicleTypeOption || vehicleTypeOption.trim() === '') {
         error = errorMessages.vehicleSelectionRequired
       } else {
+        if (route === 'checkBookingDetails') {
+          clearCacheKeys(request, [
+            cacheKeys.arrivalDay,
+            cacheKeys.arrivalMonth,
+            cacheKeys.arrivalYear,
+            cacheKeys.inspectionDateOption,
+            cacheKeys.inspectionTimeOption
+          ])
+        }
         request.yar.set(cacheKeys.vehicleTypeOption, vehicleTypeOption)
         if (vehicleTypeOption === '3' || vehicleTypeOption === '4') {
           return h.view('vehicleDetails/vehicleUnloadType', {
@@ -30,7 +40,8 @@ const vehicleDetailsController = {
             ]
           })
         }
-        return h.redirect('/')
+
+        return h.redirect('/arrivalDate')
       }
     }
 
@@ -41,6 +52,7 @@ const vehicleDetailsController = {
       vehicleTypeOption: request.yar.get(cacheKeys.vehicleTypeOption),
       error,
       backUrl: '/animalCount',
+      route: request.query.route,
       breadcrumbs: [
         {
           text: 'Back',
