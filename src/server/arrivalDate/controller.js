@@ -1,13 +1,17 @@
-import { validators } from '~/src/server/common/validations/validations.js'
+import { validators } from '~/src/server/common/validations/validations'
 import { cacheKeys } from '~/src/server/common/data/cacheKeys'
-import { errorMessages } from '~/src/server/common/validations/errorMessages.js'
+import { errorMessages } from '~/src/server/common/validations/errorMessages'
+import { clearCacheKeys } from '~/src/server/common/helpers/cache-management'
 
 const arrivalDateController = {
   handler: (request, h) => {
     let error = ''
+    let redirectRoute = request.query.route
     let arrivalDate = { day: '', month: '', year: '' }
     if (request.method === 'post') {
       const payload = request.payload
+
+      redirectRoute = payload.route
 
       arrivalDate = {
         day: payload.day || '',
@@ -22,6 +26,14 @@ const arrivalDateController = {
       )
 
       if (error === null) {
+        if (redirectRoute === 'checkBookingDetails') {
+          clearCacheKeys(request, [
+            cacheKeys.inspectionDateOption,
+            cacheKeys.inspectionTimeOption,
+            cacheKeys.inspectionDateTextOption,
+            cacheKeys.inspectionTimeTextOption
+          ])
+        }
         request.yar.set(cacheKeys.arrivalDay, arrivalDate.day)
         request.yar.set(cacheKeys.arrivalMonth, arrivalDate.month)
         request.yar.set(cacheKeys.arrivalYear, arrivalDate.year)
@@ -47,15 +59,7 @@ const arrivalDateController = {
       error,
       errorClass: '',
       backUrl: '/animalCount',
-      breadcrumbs: [
-        {
-          text: 'Back',
-          href: '/'
-        },
-        {
-          text: 'Home'
-        }
-      ]
+      route: redirectRoute
     })
   }
 }

@@ -6,6 +6,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="/arrivalDate" method="post">
+      <input type="hidden" name="route" value="{{ route }}">
         {% if error %}
          {% set errorMessage = { text: error } %}
           {% set errorClass = 'govuk-input--error' %}
