@@ -65,10 +65,10 @@ const inspectionDateController = {
     let error = ''
     // To-do - Get Inspection date from API call.
     const inspectionDateOptionCollection = [
-      { value: '1', text: 'Tuesday 28 May: 4 available inspections' },
-      { value: '2', text: 'Thursday 30 May: 12 available inspections' },
-      { value: '3', text: 'Friday 1 June: 12 available inspections' },
-      { value: '4', text: 'Tuesday 5 June: 3 available inspections' }
+      { value: '1', text: 'Tuesday 28 May 2024: 4 available inspections' },
+      { value: '2', text: 'Thursday 30 May 2024: 12 available inspections' },
+      { value: '3', text: 'Friday 1 June 2024: 12 available inspections' },
+      { value: '4', text: 'Tuesday 5 June 2024: 3 available inspections' }
     ]
 
     if (request.method === 'post') {
@@ -77,6 +77,14 @@ const inspectionDateController = {
         error = errorMessages.inspectionDateRequired
       } else {
         request.yar.set(cacheKeys.inspectionDateOption, inspectionDateOption)
+        const inspectionDateTextOption =
+          inspectionDateOptionCollection.find(
+            (obj) => obj.value === inspectionDateOption
+          )?.text || null
+        request.yar.set(
+          cacheKeys.inspectionDateTextOption,
+          ((str) => (str ? str.split(':')[0] : null))(inspectionDateTextOption)
+        )
         return h.redirect('/inspectionTime')
       }
     }
@@ -87,16 +95,7 @@ const inspectionDateController = {
       inspectionDateOptions: inspectionDateOptionCollection,
       inspectionDateOption: request.yar.get(cacheKeys.inspectionDateOption),
       error,
-      backUrl: '/arrivalDate',
-      breadcrumbs: [
-        {
-          text: 'Back',
-          href: '/'
-        },
-        {
-          text: 'Home'
-        }
-      ]
+      backUrl: '/arrivalDate'
     })
   }
 }
@@ -118,6 +117,14 @@ const inspectionTimeController = {
         error = errorMessages.inspectionTimeRequired
       } else {
         request.yar.set(cacheKeys.inspectionTimeOption, inspectionTimeOption)
+        const inspectionTimeTextOption =
+          inspectionTimeOptionCollection.find(
+            (obj) => obj.value === inspectionTimeOption
+          )?.text || null
+        request.yar.set(
+          cacheKeys.inspectionTimeTextOption,
+          inspectionTimeTextOption
+        )
         return h.redirect('/checkBookingDetails')
       }
     }

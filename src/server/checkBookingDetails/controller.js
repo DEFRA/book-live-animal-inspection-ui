@@ -21,9 +21,7 @@ const checkBookingDetailsController = {
           (obj) =>
             obj.value === parseInt(request.yar.get(cacheKeys.unloadTypeOption))
         )?.text || null,
-      arrivalDay: 'arrivalDay',
-      arrivalMonth: 'arrivalMonth',
-      arrivalYear: 'arrivalYear'
+      arrivalDate: `${request.yar.get(cacheKeys.inspectionDateTextOption)} ${request.yar.get(cacheKeys.inspectionTimeTextOption)}`
     }
     return h.view('checkBookingDetails/index', {
       pageTitle:

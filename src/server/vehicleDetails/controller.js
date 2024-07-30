@@ -70,12 +70,16 @@ const vehicleUnloadTypeController = {
   handler: (request, h) => {
     let error = ''
     if (request.method === 'post') {
-      const { unloadTypeOption } = request.payload
+      const { unloadTypeOption, route } = request.payload
       if (!unloadTypeOption || unloadTypeOption.trim() === '') {
         error = errorMessages.vehicleUnloadSelectionRequired
       } else {
         request.yar.set(cacheKeys.unloadTypeOption, unloadTypeOption)
-        return h.redirect('/arrivalDate')
+        if (route === 'checkBookingDetails') {
+          return h.redirect('/checkBookingDetails')
+        } else {
+          return h.redirect('/arrivalDate')
+        }
       }
     }
 
@@ -86,15 +90,7 @@ const vehicleUnloadTypeController = {
       unloadTypeOption: request.yar.get(cacheKeys.unloadTypeOption),
       error,
       backUrl: '/vehicleDetails',
-      breadcrumbs: [
-        {
-          text: 'Back',
-          href: '/'
-        },
-        {
-          text: 'Home'
-        }
-      ]
+      route: request.query.route
     })
   }
 }

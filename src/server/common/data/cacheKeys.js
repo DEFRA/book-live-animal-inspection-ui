@@ -9,6 +9,8 @@ const cacheKeys = {
   arrivalYear: 'arrivalYear',
   inspectionDateOption: 'inspectionDateOption',
   inspectionTimeOption: 'inspectionTimeOption',
+  inspectionDateTextOption: 'inspectionDateTextOption',
+  inspectionTimeTextOption: 'inspectionTimeTextOption',
   declarationOption: 'declarationOption'
 }
 
