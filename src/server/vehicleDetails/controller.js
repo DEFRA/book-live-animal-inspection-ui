@@ -51,7 +51,8 @@ const vehicleDetailsController = {
       vehicleTypes: optionsData.vehicleTypes,
       vehicleTypeOption: request.yar.get(cacheKeys.vehicleTypeOption),
       error,
-      backUrl: '/animalCount',
+      backUrl:
+        request.query.route != null ? request.query.route : '/animalCount',
       route: request.query.route,
       breadcrumbs: [
         {
@@ -89,7 +90,8 @@ const vehicleUnloadTypeController = {
       vehicleUnloadTypes: optionsData.vehicleUnloadTypes,
       unloadTypeOption: request.yar.get(cacheKeys.unloadTypeOption),
       error,
-      backUrl: '/vehicleDetails',
+      backUrl:
+        request.query.route != null ? request.query.route : '/vehicleDetails',
       route: request.query.route
     })
   }

@@ -28,7 +28,7 @@ const animalCountController = {
       error,
       errorClass: '',
       animalCount: request.yar.get(cacheKeys.animalCount),
-      backUrl: '/animalSelection',
+      backUrl: redirectRoute != null ? redirectRoute : '/animalSelection',
       route: redirectRoute
     })
   }

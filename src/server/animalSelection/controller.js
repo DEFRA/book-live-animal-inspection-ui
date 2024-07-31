@@ -35,7 +35,7 @@ const animalSelectionController = {
       page: 'animalSelection',
       error,
       animalSelection: request.yar.get('animalSelection'),
-      backUrl: '/location',
+      backUrl: redirectRoute != null ? redirectRoute : '/location',
       route: redirectRoute
     })
   }
