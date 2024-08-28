@@ -1,0 +1,61 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/location" method="post">
+
+        {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+      {%endif%}
+
+        {% if error %}
+          {{ govukRadios({
+          name: "locationOption",
+          value: data['locationOption'],
+          fieldset: {
+            legend: {
+              text: "Which border control post are you going to?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: locations,
+          errorMessage: {
+          text: error
+          }
+        }) }}
+        {%else%}
+          {{ govukRadios({
+          name: "locationOption",
+          value: locationOption,
+          fieldset: {
+            legend: {
+              text: "Which border control post are you going to?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: locations
+        }) }}
+        {%endif%}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+

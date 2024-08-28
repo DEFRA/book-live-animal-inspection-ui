@@ -1,0 +1,47 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/inspectionTime" method="post">
+
+         {% if error %}
+           {% set errorMessage = { text: error } %}
+          {% set errorClass = 'govuk-input--error' %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+       {% else %}
+          {% set errorMessage = null %}
+       {% endif %}
+          {{ govukRadios({
+          name: "inspectionTimeOption",
+          value: inspectionTimeOption,
+          fieldset: {
+            legend: {
+              text: "Choose an inspection date",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l " ~ errorClass
+            }
+          },
+          items: inspectionTimeOptions,
+          errorMessage: errorMessage
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+

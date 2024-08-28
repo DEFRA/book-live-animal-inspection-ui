@@ -1,0 +1,73 @@
+{% extends 'layouts/page.njk' %}
+{% set displayBacklink = true %}
+
+{% block content %}
+  {% call appPageBody() %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/vehicleDetails" method="post">
+       <input type="hidden" name="route" value="{{ route }}">
+        {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#"
+            }
+          ]
+        }) }} 
+      {%endif%}
+       {% if route === 'checkBookingDetails' %} 
+        {{ govukWarningText({
+            text: "If you change this answer, you will need to select a new inspection date and time.",
+            iconFallbackText: "Warning"
+        }) }}
+       {%endif%}
+
+        {% if error %}
+          {{ govukRadios({
+          name: "vehicleTypeOption",
+          value: vehicleTypeOption,
+          fieldset: {
+            legend: {
+              text: "What type of vehicle will you use??",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+           text: "You must book a separate inspection for each vehicle."
+          },
+          items: vehicleTypes,
+          errorMessage: {
+          text: error
+          }
+        }) }}
+        {%else%}
+          {{ govukRadios({
+          name: "vehicleTypeOption",
+          value: vehicleTypeOption,
+          fieldset: {
+            legend: {
+              text: "What type of vehicle will you use?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+           hint: {
+           text: "You must book a separate inspection for each vehicle."
+          },
+          items: vehicleTypes
+        }) }}
+        {%endif%}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+  {% endcall %}
+{% endblock %}
+
