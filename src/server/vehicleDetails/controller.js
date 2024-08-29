@@ -40,7 +40,7 @@ const vehicleDetailsController = {
             ]
           })
         }
-
+        clearCacheKeys(request, [cacheKeys.unloadTypeOption])
         return h.redirect('/arrivalDate')
       }
     }
@@ -77,10 +77,15 @@ const vehicleUnloadTypeController = {
       } else {
         request.yar.set(cacheKeys.unloadTypeOption, unloadTypeOption)
         if (route === 'checkBookingDetails') {
-          return h.redirect('/checkBookingDetails')
-        } else {
-          return h.redirect('/arrivalDate')
+          clearCacheKeys(request, [
+            cacheKeys.arrivalDay,
+            cacheKeys.arrivalMonth,
+            cacheKeys.arrivalYear,
+            cacheKeys.inspectionDateOption,
+            cacheKeys.inspectionTimeOption
+          ])
         }
+        return h.redirect('/arrivalDate')
       }
     }
 
