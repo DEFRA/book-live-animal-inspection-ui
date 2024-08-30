@@ -58,7 +58,7 @@ const arrivalDateController = {
       arrivalDate,
       error,
       errorClass: '',
-      backUrl: '/animalCount',
+      backUrl: redirectRoute != null ? redirectRoute : '/vehicleDetails',
       route: redirectRoute
     })
   }
