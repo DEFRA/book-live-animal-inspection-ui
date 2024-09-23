@@ -25,9 +25,6 @@
 
 {% block head %}
   <link href="{{ getAssetPath('application.css') }}" rel="stylesheet">
-  {%if page == "animalSelection"%} 
-    <link href="{{ getAssetPath('components/accessible-autocomplete.min') }}" rel="stylesheet">
-   {%endif%}
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{googleSiteTagId}}"></script>
   <script>
