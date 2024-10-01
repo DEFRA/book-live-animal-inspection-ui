@@ -106,10 +106,11 @@ describe('Animal Controllers', () => {
           'Chicken',
           'Sheep',
           'Fish',
-          'hinnies'
+          'hinnies',
+          'shrews'
         ])
       )
-      expect(result).toHaveLength(5) // Ensure it only returns matching items
+      expect(result).toHaveLength(6) // Ensure it only returns matching items
     })
 
     it('should return an empty array if no matches found', () => {
