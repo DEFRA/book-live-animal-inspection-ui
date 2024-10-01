@@ -56,7 +56,8 @@ const animalReferenceDataController = {
       'Geese',
       'Fish',
       'hinnies',
-      'asses'
+      'asses',
+      'shrews'
     ]
 
     const query = request.query.q.toLowerCase()
